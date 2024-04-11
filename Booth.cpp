@@ -3,6 +3,27 @@
 
 using namespace std;
 
+void corrimiento_aritmetico(vector<bool>& A, vector<bool>& Q, bool& Q_1);
+void suma_numeros_con_signo(vector<bool>& A, const vector<bool>& M);
+void resta_complemento_2(vector<bool>& A, const vector<bool>& M);
+void mostrar_bits(const vector<bool>& A, const vector<bool>& Q);
+void multiplicacion_booth(const vector<bool>& M, const vector<bool>& Q);
+
+int main() {
+	int multiplicando, multiplicador;
+	cout << "Introduzca el multiplicando: ";
+	cin >> multiplicando;
+	cout << "Introduzca el multiplicador: ";
+	cin >> multiplicador;
+	
+	int n_bits = max(__builtin_clz(abs(multiplicando)), __builtin_clz(abs(multiplicador))) + 1;
+	multiplicacion_booth(vector<bool>(n_bits, multiplicando), vector<bool>(n_bits, multiplicador));
+	
+	return 0;
+}
+
+
+
 void corrimiento_aritmetico(vector<bool>& A, vector<bool>& Q, bool& Q_1) {
 	bool A0 = A[0];
 	bool Q0 = Q[0];
@@ -74,17 +95,4 @@ void multiplicacion_booth(const vector<bool>& M, const vector<bool>& Q) {
 		corrimiento_aritmetico(A, q, q_1); 
 		mostrar_bits(A, q);
 	}
-}
-
-int main() {
-	int multiplicando, multiplicador;
-	cout << "Ingrese el multiplicando: ";
-	cin >> multiplicando;
-	cout << "Ingrese el multiplicador: ";
-	cin >> multiplicador;
-	
-	int n_bits = max(__builtin_clz(abs(multiplicando)), __builtin_clz(abs(multiplicador))) + 1;
-	multiplicacion_booth(vector<bool>(n_bits, multiplicando), vector<bool>(n_bits, multiplicador));
-	
-	return 0;
 }
